@@ -46,11 +46,11 @@ class ComplexNr : public Information {
             if (this->getB() > 0)
                 cout << endl << "Resulted number: " << this->getA() << " + " << this->getB() << "i";
             else
-                cout << endl << "Resulted number: " << this->getA() << " - " << this->getB() << "i";
+                cout << endl << "Resulted number: " << this->getA() << " - " << this->getB() * (-1) << "i";
         }
 
         void mainDisplay() {
-            cout << *this;
+            cout << "The complex number is: " << *this;
         }
 
 
@@ -88,12 +88,26 @@ istream& operator >> (istream& in,  ComplexNr &N){
     cout << "Real Coefficient: ";
     float R;
     cin >> R;
+    try{
+        if (cin.fail())
+            throw "ERROR";
+    }
+    catch (char* ERROR){
+        cout << ERROR << endl;
+    }
     cout << endl;
     N.a = R;
 
     cout << "Complex Coefficient: ";
     int C;
     cin >> C;
+        try{
+        if (cin.fail())
+            throw "ERROR";
+    }
+    catch (char* ERROR){
+        cout << ERROR << endl;
+    }
     cout << endl;
     N.b = C;
 
@@ -104,7 +118,7 @@ ostream& operator << (ostream& out, const ComplexNr &N) {
     if (N.b > 0)
         out << N.a << " + " << N.b << "i";
     else
-        out << N.a << " - " << N.b << "i";
+        out << N.a << " - " << N.b * (-1) << "i";
     return out;
 }
 
