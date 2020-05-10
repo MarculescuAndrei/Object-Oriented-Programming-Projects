@@ -6,6 +6,7 @@
 #include "Address.h"
 #include <vector>
 #include <cstdlib>
+#include <cstring>
 
 using namespace std;
 
