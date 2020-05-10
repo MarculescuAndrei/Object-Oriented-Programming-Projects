@@ -57,7 +57,7 @@ istream& operator >> (istream& in, Number &N){
         if (cin.fail())
             throw "ERROR";
     }
-    catch (char* ERROR){
+    catch (string ERROR){
         cout << ERROR << endl;
     }
     N.Value = Nr;
