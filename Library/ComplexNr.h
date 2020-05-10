@@ -92,7 +92,7 @@ istream& operator >> (istream& in,  ComplexNr &N){
         if (cin.fail())
             throw "ERROR";
     }
-    catch (char* ERROR){
+    catch (string ERROR){
         cout << ERROR << endl;
     }
     cout << endl;
@@ -105,7 +105,7 @@ istream& operator >> (istream& in,  ComplexNr &N){
         if (cin.fail())
             throw "ERROR";
     }
-    catch (char* ERROR){
+    catch (string ERROR){
         cout << ERROR << endl;
     }
     cout << endl;
