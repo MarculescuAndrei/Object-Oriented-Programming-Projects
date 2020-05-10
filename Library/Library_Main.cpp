@@ -5,15 +5,16 @@
 #include "ComplexNr.h"
 #include "Address.h"
 #include <vector>
+#include <cstdlib>
+
 using namespace std;
 
-int IDnr = 0;
+int IDnr = 10;
 
 class Library{
 
     private:
-        
-        // Main data type :
+
         vector<Information*> lst;
 
     public:
@@ -49,7 +50,7 @@ class Library{
 // Addition Methods :
 
 void Library :: Add(){
-    IDnr++;
+    IDnr = rand() % 8999 + 1001;
     int Sw, OK = 1;
     string name;
 
@@ -65,13 +66,13 @@ void Library :: Add(){
     if (found  == 0){
 
         while(OK == 1){
-            cout << endl << " ______________________________ ";
+            cout << endl << " ------------------------------ ";
             cout << endl << "Choose your type of information: ";
             cout << endl << "1 = Number";
             cout << endl << "2 = Text";
             cout << endl << "3 = Address";
             cout << endl << "4 = Complex Number";
-            cout << endl << " ______________________________ ";
+            cout << endl << " ------------------------------ ";
             cout << endl << "Choice: ";
             cin >> Sw;
 
@@ -173,11 +174,11 @@ void Library :: Recovery(){
 
     int Sw, OK = 1;
     while(OK == 1){
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "You can access the information by: ";
         cout << endl << "1 = Name";
         cout << endl << "2 = ID";
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "Choice: ";
         cin >> Sw;
     switch(Sw){
@@ -207,7 +208,7 @@ void Library :: NameRecovery(){
 
 void Library :: IDRecovery(){
     int IDChecker;
-    cout << endl << "Give the name: ";
+    cout << endl << "Give the ID: ";
     cin >> IDChecker;
 
     int OK = 0;
@@ -226,13 +227,13 @@ void Library :: Search(){
     int Sw, OK = 1;
 
     while(OK == 1){
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "Choose the type of information you want to search: ";
         cout << endl << "1 = Number";
         cout << endl << "2 = Text";
         cout << endl << "3 = Address";
         cout << endl << "4 = Complex Number";
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "Choice: ";
         cin >> Sw;
 
@@ -337,11 +338,11 @@ void Library :: Delete(){
     int Sw, OK = 1;
 
     while(OK == 1){
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "Choose how to search for the information that you want to remove: ";
         cout << endl << "1 = Name";
         cout << endl << "2 = ID";
-        cout << endl << " ______________________________ ";
+        cout << endl << " ------------------------------ ";
         cout << endl << "Choice: ";
         cin >> Sw;
 
@@ -399,16 +400,18 @@ int main()
     Library* X = new Library;
     int Sw, OK = 1;
 
-    do{
+    cout << endl << " ---- Virtual Library ---- ";
+    cout << endl << " Make Your Choice : ";
+    cout << endl << "1 = Add Information";
+    cout << endl << "2 = Search Information (By Name / ID)";
+    cout << endl << "3 = Search Information (By Value)";
+    cout << endl << "4 = Delete Information";
+    cout << endl << "5 = Show Actions";
+    cout << endl << "6 = Exit the Library!";
+    cout << endl << " ----------- = -----------";
 
-        cout << endl << " ---- Virtual Library ---- ";
-        cout << endl << " Make Your Choice : ";
-        cout << endl << "1 = Add Information";
-        cout << endl << "2 = Recover Information";
-        cout << endl << "3 = Search Information";
-        cout << endl << "4 = Delete Information";
-        cout << endl << "0 = Exit!" << endl;
-        cout << "Your Choice: ";
+    while(OK == 1){
+        cout << endl << "Your Choice: ";
 
         cin >> Sw;
         switch(Sw){
@@ -425,13 +428,40 @@ int main()
             case 4: X->Delete();
                     break;
 
-            case 5: OK = 0;
+            case 5: cout << endl << " ---- Virtual Library ---- ";
+                    cout << endl << " Make Your Choice : ";
+                    cout << endl << "1 = Add Information";
+                    cout << endl << "2 = Search Information (By Name / ID)";
+                    cout << endl << "3 = Search Information (By Value)";
+                    cout << endl << "4 = Delete Information";
+                    cout << endl << "5 = Show Actions";
+                    cout << endl << "6 = Exit the Library!";
+                    cout << endl << " ---- ---- --==-- ---- ----";
+                    break;
+            case 6: OK = 0;
+                    cout << endl << "____________________$_$_$";
+                    cout << endl << "_____$$$$$_________$_$_$_$";
+                    cout << endl << "___$$_____$$______$_______$";
+                    cout << endl << "__$_________$_____$_______$";
+                    cout << endl << "_$___________$_____$$$$$$$";
+                    cout << endl << "_$__$$___$$__$___$$$_____$";
+                    cout << endl << "$___$o___o$___$$$$$$$_$_$$";
+                    cout << endl << "$_____________$$$$$$$_$_$$";
+                    cout << endl << "$______$______$_$$_$$_$_$$";
+                    cout << endl << "$_____________$___$$_____$";
+                    cout << endl << "$__$_______$__$____$$$$$$$";
+                    cout << endl << "_$__$_____$__$______$$$$$";
+                    cout << endl << "_$___$$$$$___$";
+                    cout << endl << "__$_________$";
+                    cout << endl << "___$$_____$$";
+                    cout << endl << "_____$$$$$";
+
                     break;
             default: cout << endl << "Choose a valid number!";
         }
 
         cout << endl;
-    }while(OK == 1);
+    }
 
 return 0;
 }
