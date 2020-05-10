@@ -53,6 +53,13 @@ istream& operator >> (istream& in, Number &N){
     cout << "Add a number: ";
     int Nr;
     cin>>Nr;
+    try{
+        if (cin.fail())
+            throw "ERROR";
+    }
+    catch (char* ERROR){
+        cout << ERROR << endl;
+    }
     N.Value = Nr;
 
     return in;
