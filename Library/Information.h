@@ -1,6 +1,6 @@
 #pragma once
 #include<stdlib.h>
-#include<string.h>
+#include<cstring>
 #include <iostream>
 using namespace std;
 
