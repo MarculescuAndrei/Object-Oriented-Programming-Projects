@@ -65,8 +65,8 @@ istream& operator >> (istream& in, Address &X){
                 if(cin.fail())
                    throw "ERROR";
             }
-            catch (char* error){
-                cout << error << endl;
+            catch (string ERROR){
+                cout << ERROR << endl;
             }
 
             X.Number = NumberChecker;
