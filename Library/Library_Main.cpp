@@ -12,7 +12,8 @@ int IDnr = 0;
 class Library{
 
     private:
-
+        
+        // Main data type :
         vector<Information*> lst;
 
     public:
