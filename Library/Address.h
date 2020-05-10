@@ -58,7 +58,18 @@ istream& operator >> (istream& in, Address &X){
             in >> X.Street;
 
             cout << "Number: ";
-            in >> X.Number;
+            int NumberChecker;
+            cin >> NumberChecker;
+
+            try{
+                if(cin.fail())
+                   throw "ERROR";
+            }
+            catch (char* error){
+                cout << error << endl;
+            }
+
+            X.Number = NumberChecker;
 
             return in; }
 
@@ -73,4 +84,3 @@ bool operator ==(Address const X, Address const Y) {
         verification = false;
     return verification;
 }
-
