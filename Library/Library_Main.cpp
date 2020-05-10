@@ -6,7 +6,6 @@
 #include "Address.h"
 #include <vector>
 #include <cstdlib>
-#include <cstring>
 
 using namespace std;
 
@@ -30,16 +29,16 @@ class Library{
         void AddComplexNr(string Name);
 
         // Recovery Methods:
-        void Recovery();
+        void RecoveryParameters();
         void IDRecovery();
         void NameRecovery();
 
         // Search Methods:
-        void Search();
-        void SearchComplexNr();
-        void SearchText();
-        void SearchAddress();
-        void SearchNumber();
+        void RecoveryValue();
+        void RecoveryComplexNr();
+        void RecoveryText();
+        void RecoveryAddress();
+        void RecoveryNumber();
 
         // Removal Methods:
         void Delete();
@@ -169,9 +168,9 @@ void Library :: AddComplexNr(string name){
     lst.push_back(N);
 }
 
-// Recovery Methods :
+// Recovery by Main Parameters Methods :
 
-void Library :: Recovery(){
+void Library :: RecoveryParameters(){
 
     int Sw, OK = 1;
     while(OK == 1){
@@ -222,9 +221,9 @@ void Library :: IDRecovery(){
         cout << endl << "No information in the library has this ID.";
 }
 
-// Search Methods :
+// Recovery by Value Methods :
 
-void Library :: Search(){
+void Library :: RecoveryValue(){
     int Sw, OK = 1;
 
     while(OK == 1){
@@ -239,22 +238,22 @@ void Library :: Search(){
         cin >> Sw;
 
         switch(Sw){
-            case 1: SearchNumber();
+            case 1: RecoveryNumber();
                 OK = 0;
                 break;
-            case 2: SearchText();
+            case 2: RecoveryText();
                 OK = 0;
                 break;
-            case 3: SearchAddress();
+            case 3: RecoveryAddress();
                 OK = 0;
                 break;
-            case 4: SearchComplexNr();
+            case 4: RecoveryComplexNr();
                 OK = 0;
                 break;
             default: cout << "Choose a valid number.";} }
 }
 
-void Library :: SearchNumber(){
+void Library :: RecoveryNumber(){
     Number* N = new Number;
     cin >> *N;
     int OK = 0;
@@ -273,7 +272,7 @@ void Library :: SearchNumber(){
     }
 }
 
-void Library :: SearchText(){
+void Library :: RecoveryText(){
     Text* T1 = new Text;
     cin >> *T1;
     int OK = 0;
@@ -290,7 +289,7 @@ void Library :: SearchText(){
     }
 }
 
-void Library :: SearchAddress(){
+void Library :: RecoveryAddress(){
     Address* A1 = new Address;
     cin >> *A1;
     int OK = 0;
@@ -309,7 +308,7 @@ void Library :: SearchAddress(){
     }
 }
 
-void Library :: SearchComplexNr(){
+void Library :: RecoveryComplexNr(){
     ComplexNr* N = new ComplexNr;
     cin >> *N;
     int OK = 0;
@@ -404,8 +403,8 @@ int main()
     cout << endl << " ---- Virtual Library ---- ";
     cout << endl << " Make Your Choice : ";
     cout << endl << "1 = Add Information";
-    cout << endl << "2 = Search Information (By Name / ID)";
-    cout << endl << "3 = Search Information (By Value)";
+    cout << endl << "2 = Recover Information (By Name / ID)";
+    cout << endl << "3 = Recover Information (By Value)";
     cout << endl << "4 = Delete Information";
     cout << endl << "5 = Show Actions";
     cout << endl << "6 = Exit the Library!";
@@ -420,10 +419,10 @@ int main()
             case 1: X->Add();
                     break;
 
-            case 2: X->Recovery();
+            case 2: X->RecoveryParameters();
                     break;
 
-            case 3: X->Search();
+            case 3: X->RecoveryValue();
                     break;
 
             case 4: X->Delete();
@@ -432,8 +431,8 @@ int main()
             case 5: cout << endl << " ---- Virtual Library ---- ";
                     cout << endl << " Make Your Choice : ";
                     cout << endl << "1 = Add Information";
-                    cout << endl << "2 = Search Information (By Name / ID)";
-                    cout << endl << "3 = Search Information (By Value)";
+                    cout << endl << "2 = Recover Information (By Name / ID)";
+                    cout << endl << "3 = Recover Information (By Value)";
                     cout << endl << "4 = Delete Information";
                     cout << endl << "5 = Show Actions";
                     cout << endl << "6 = Exit the Library!";
