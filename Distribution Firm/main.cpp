@@ -69,9 +69,9 @@ void Film::Read(istream &in)
 }
 void Film::Display(ostream &out)
 {
-    out<<"Denumire Film: "<<filmName<<"\n";
-    out<<"Genul Filmului: "<<type<<"\n";
-    out<<"length Filmului: "<<length<<"\n";
+    out<<"Film Name: "<<filmName<<"\n";
+    out<<"Film Type: "<<type<<"\n";
+    out<<"Film Length: "<<length<<"\n";
 }
 Film::Film (Film &p)
 {
@@ -104,7 +104,8 @@ ostream& operator<<(ostream& out, Film& f)
     f.Display(out);
     return out;
 }
-///------------------------------------------------------
+
+//------------------------------------------------------//
 
 class person
 {
@@ -182,11 +183,13 @@ void person::Display(ostream &out)
     out<<"SSN: "<<SSN<<"\n";
     out<<"Name: "<<personName<<"\n";
     out<<"The "<<Nr<<" films are: "<<"\n";
+    out<<"-------------------------- \n";
     int i;
     for(i=0;i<Nr-1;i++)
         out<<Films[i]<<"\n";
     if (Nr!=0)
         out<<Films[i];
+    out<<"-------------------------- \n";
 }
 person& person :: operator= (person &x)
 {
@@ -212,7 +215,9 @@ ostream& operator<<(ostream& out, person& p)
     p.Display(out);
     return out;
 }
-///-------------------------------------------------
+
+//------------------------------------------------------//
+
 class personnel:public person
 {
 protected:
@@ -308,7 +313,8 @@ ostream& operator<<(ostream& out, personnel& p)
     return out;
 }
 
-///-------------------------------------------------
+//------------------------------------------------------//
+
 class director:public personnel
 {
     double* fixedSum;
@@ -390,7 +396,9 @@ ostream& operator<<(ostream& out, director& p)
     p.Display(out);
     return out;
 }
-///-------------------------------------------------
+
+//------------------------------------------------------//
+
 class actor:public personnel
 {
     bool* mainActor;
@@ -476,7 +484,8 @@ ostream& operator<<(ostream& out, actor& p)
     return out;
 }
 
-///-------------------------------------------------
+//------------------------------------------------------//
+
 class technician:public personnel
 {
     string* specialization;
@@ -556,6 +565,7 @@ ostream& operator<<(ostream& out, technician& p)
     return out;
 }
 
+//------------------------------------------------------//
 
 template <class T> class DistributionFirm
 {
@@ -594,7 +604,7 @@ public:
         cout<<"Introduce the number of personnel: ";
         in>>g.Nr;
         g.v=new T[g.Nr];
-        cout<<"Introduce a worker: \n";
+        cout<<"Introduce an employee: \n";
         for(int i=0;i<g.Nr;i++){
            in>>g.v[i];
            cout<<"\n";
@@ -736,7 +746,9 @@ void menu_output()
     cout<<"\n";
     cout<<"4 = Introduce Actors";
     cout<<"\n";
-    cout<<"5 = Firm Statistics";
+    cout<<"5 = Firm Employees";
+    cout<<"\n";
+    cout<<"6 = Firm Statistics";
     cout<<"\n";
     cout<<"0 = EXIT!";
     cout<<"\n";
@@ -761,12 +773,6 @@ void menu()
             {
                 for(int i=0;i<n;)
                     type(v[i],i);
-                cout<<"\n Displaying the previous employee additions:\n";
-                for(int i=0;i<n;i++)
-                   {
-                        cout<<"\n"<<*v[i];
-                        cout<<"--------------------------\n";
-                   }
             }
             else
                 cout<<"The given number has to be positive.\n";
@@ -789,7 +795,21 @@ void menu()
             cin>>x;
             cout<<x;
         }
-        if (option==5)
+        if (option == 5)
+        {
+            if (n == 0){
+                cout << "\n No employees have been added yet. \n";
+            }
+            else{
+                cout<<"\n Displaying the previous employee additions:\n";
+                for(int i=0;i<n;i++)
+                    {
+                        cout<<"\n"<<*v[i];
+                        cout<<"--------------------------\n";
+                    }
+            }
+        }
+        if (option == 6)
         {
             int NrDir,NrAct,NrTech;
             NrDir=NrAct=NrTech=0;
