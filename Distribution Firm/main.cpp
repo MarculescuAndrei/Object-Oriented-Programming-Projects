@@ -751,7 +751,7 @@ void menu_output()
     cout<<"6 = Firm Statistics";
     cout<<"\n";
     cout<<"0 = EXIT!";
-    cout<<"\n";
+    cout<<"\n===========================================\n";
 }
 void menu()
 {
