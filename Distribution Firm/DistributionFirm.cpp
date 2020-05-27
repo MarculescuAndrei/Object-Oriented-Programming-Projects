@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include <string.h>
+#include <ctring>
 using namespace std;
 
 class Film
@@ -34,7 +34,7 @@ Film::Film (string num="", string gen="", double minutes=0)
     }
     catch (double x)
     {
-        cout<<"Error in the constructor, minutes cannot be negative numbers.\n";
+        cout<<"\nError in the constructor, minutes cannot be negative numbers.\n";
         exit(EXIT_FAILURE);
     }
     length=minutes;
@@ -62,7 +62,7 @@ void Film::Read(istream &in)
     }
     catch (int x)
     {
-        cout<<"Error in the specification of length, minutes cannot be in negative numbers.\n";
+        cout<<"\nError in the specification of length, minutes cannot be in negative numbers.\n";
         exit(EXIT_FAILURE);
     }
     length=d;
@@ -399,6 +399,76 @@ ostream& operator<<(ostream& out, director& p)
 
 //------------------------------------------------------//
 
+
+class technician:public personnel
+{
+    string* specialization;
+public:
+    technician(string, string, Film*,int, double*,string*);
+    technician(technician&);
+    ~technician();
+
+    void Read(istream &in);
+    void Display(ostream &out);
+
+    technician& operator=(technician &p);
+    friend istream& operator>>(istream&, technician&);
+    friend ostream& operator<<(ostream&, technician&);
+};
+technician::technician(string c="",string namep="",Film* f=NULL,int n=0,double percent[]=0,string spec[]=0):personnel(c,namep,f,n,percent)
+{
+    if (f)
+    {
+    specialization=new string[Nr];
+    for (int i=0;i<Nr;i++)
+        specialization[i]=spec[i];
+    }
+}
+technician::technician(technician &p):personnel(p)
+{
+    specialization=new string[Nr];
+    for (int i=0;i<p.Nr;i++)
+        specialization[i]=p.specialization[i];
+}
+technician::~technician()
+{
+
+}
+void technician::Read(istream &in)
+{
+    personnel::Read(in);
+
+}
+void technician::Display(ostream &out)
+{
+    personnel::Display(out);
+
+}
+technician& technician :: operator=(technician &x)
+{
+    if(this!=&x)
+    {
+        personnel::operator=(x);
+        for (int i=0;i<x.Nr;i++)
+            specialization[i]=x.specialization[i];
+    }
+    return *this;
+}
+
+istream& operator>>(istream& in,technician& p)
+{
+    p.Read(in);
+    return in;
+}
+
+ostream& operator<<(ostream& out, technician& p)
+{
+    p.Display(out);
+    return out;
+}
+
+//------------------------------------------------------//
+
 class actor:public personnel
 {
     bool* mainActor;
@@ -486,75 +556,6 @@ ostream& operator<<(ostream& out, actor& p)
 
 //------------------------------------------------------//
 
-class technician:public personnel
-{
-    string* specialization;
-public:
-    technician(string, string, Film*,int, double*,string*);
-    technician(technician&);
-    ~technician();
-
-    void Read(istream &in);
-    void Display(ostream &out);
-
-    technician& operator=(technician &p);
-    friend istream& operator>>(istream&, technician&);
-    friend ostream& operator<<(ostream&, technician&);
-};
-technician::technician(string c="",string namep="",Film* f=NULL,int n=0,double percent[]=0,string spec[]=0):personnel(c,namep,f,n,percent)
-{
-    if (f)
-    {
-    specialization=new string[Nr];
-    for (int i=0;i<Nr;i++)
-        specialization[i]=spec[i];
-    }
-}
-technician::technician(technician &p):personnel(p)
-{
-    specialization=new string[Nr];
-    for (int i=0;i<p.Nr;i++)
-        specialization[i]=p.specialization[i];
-}
-technician::~technician()
-{
-
-}
-void technician::Read(istream &in)
-{
-    personnel::Read(in);
-
-}
-void technician::Display(ostream &out)
-{
-    personnel::Display(out);
-
-}
-technician& technician :: operator=(technician &x)
-{
-    if(this!=&x)
-    {
-        personnel::operator=(x);
-        for (int i=0;i<x.Nr;i++)
-            specialization[i]=x.specialization[i];
-    }
-    return *this;
-}
-
-istream& operator>>(istream& in,technician& p)
-{
-    p.Read(in);
-    return in;
-}
-
-ostream& operator<<(ostream& out, technician& p)
-{
-    p.Display(out);
-    return out;
-}
-
-//------------------------------------------------------//
-
 template <class T> class DistributionFirm
 {
     T *v;
@@ -601,7 +602,7 @@ public:
     }
     friend ostream& operator <<(ostream &out, DistributionFirm<T> &g)
     {
-        out<<"In the Distribution Firm there are the following "<<g.Nr<<" people: "<<"\n";
+        out<<"\nIn the Distribution Firm there are the following "<<g.Nr<<" people: "<<"\n";
         for(int i=0;i<g.Nr;i++)
             out<<g.v[i]<<"\n";
         return out;
@@ -672,7 +673,7 @@ public:
     }
     friend ostream& operator <<(ostream &out, DistributionFirm<actor> &g)
     {
-        out<<"In the Distribution Firm there are "<<g.Nr<<" implicated actors.\n";
+        out<<"\nIn the Distribution Firm there are "<<g.Nr<<" implicated actors.\n";
         for(int i=0;i<g.Nr;i++)
             out<<g.v[i]<<"\n";
         out<<"Out of them, "<<g.MainActorNr<<" are main actors.\n";
@@ -683,8 +684,7 @@ public:
 
 void type(personnel *&p, int &i) {
     string s;
-    cout<<"\n";
-    cout<<"Introduce the post of the personnel number "<<i+1<<": ";
+    cout<<"\nIntroduce the post of the personnel number "<<i+1<<": ";
     cin>>s;
     try
     {
@@ -718,13 +718,13 @@ void type(personnel *&p, int &i) {
     }
     catch(int j)
     {
-        cout<<"You have not introduced a valid post, you need to specify technician, director or actor.\n ";
+        cout<<"\nYou have not introduced a valid post, you need to specify technician, director or actor.\n ";
     }
 }
 void menu_output()
 {
     cout<<"\nDistribution Firm\n";
-    cout<<"\n          - - --- - MENU - --- - -          ";
+    cout<<"\n           - - --- - MENU - --- - -          ";
     cout<<"\n===========================================\n";
     cout<<"\n";
     cout<<"1 = Read the information for the people that are implicated";
