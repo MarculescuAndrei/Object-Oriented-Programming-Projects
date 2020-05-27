@@ -1,6 +1,6 @@
 #include <iostream>
-#include <cstdlib>
-#include <cstring>
+#include <stdlib.h>
+#include <string.h>
 using namespace std;
 
 class Film
@@ -180,7 +180,7 @@ void person::Read(istream &in)
 }
 void person::Display(ostream &out)
 {
-    out<<"SSN: "<<SSN<<"\n";
+    out<<"\nSSN: "<<SSN<<"\n";
     out<<"Name: "<<personName<<"\n";
     out<<"The "<<Nr<<" films are: "<<"\n";
     out<<"-------------------------- \n";
@@ -355,7 +355,7 @@ void director::Read(istream &in)
     fixedSum=new double[Nr];
     for (int i=0;i<Nr;i++)
     {
-        cout<<"Introduce the fixed amount of money for employee "<<i+1<<": ";
+        cout<<"Introduce the fixed amount of money: ";
         string p1;
         in>>p1;
         double d;
@@ -523,24 +523,12 @@ technician::~technician()
 void technician::Read(istream &in)
 {
     personnel::Read(in);
-    specialization=new string[Nr];
-    for (int i=0;i<Nr;i++)
-    {
-        cout<<"Specialization for the movie number "<<i+1<<": ";
-        string d;
-        in>>d;
-        specialization[i]=d;
-    }
+
 }
 void technician::Display(ostream &out)
 {
     personnel::Display(out);
-    int i;
-    for (i=0;i<Nr-1;i++)
-        out<<"Specialization for the movie number "<<i+1<<": "<<specialization[i]<<"\n";
-    if (Nr!=0)
-        out<<"Specialization for the movie numberl "<<i+1<<": "<<specialization[i];
-    out<<"\n";
+
 }
 technician& technician :: operator=(technician &x)
 {
@@ -601,7 +589,7 @@ public:
     T get_v(int i) {return v[i];}
     friend istream& operator >>(istream &in, DistributionFirm <T> &g)
     {
-        cout<<"Introduce the number of personnel: ";
+        cout<<"Introduce the number of personnel: \n";
         in>>g.Nr;
         g.v=new T[g.Nr];
         cout<<"Introduce an employee: \n";
@@ -664,12 +652,13 @@ public:
 
     int getNr() {return Nr;}
     actor get_v(int i) {return v[i];}
+
     friend istream& operator >>(istream &in, DistributionFirm <actor> &g)
     {
         cout<<"Introduce the number of implicated actors: ";
         in>>g.Nr;
         g.v=new actor[g.Nr];
-        cout<<"Introduce elements: ";
+        cout<<"\n";
         for(int i=0;i<g.Nr;i++)
         {
             in>>g.v[i];
@@ -734,23 +723,23 @@ void type(personnel *&p, int &i) {
 }
 void menu_output()
 {
-    cout<<"\nDISTRIBUTION FIRM\n";
-    cout<<"\nMENIU:";
+    cout<<"\nDistribution Firm\n";
+    cout<<"\n          - - --- - MENU - --- - -          ";
     cout<<"\n===========================================\n";
     cout<<"\n";
     cout<<"1 = Read the information for the people that are implicated";
     cout<<"\n";
-    cout<<"2 = Introduce Directors";
+    cout<<"2 = Firm Employees";
     cout<<"\n";
-    cout<<"3 = Introduce Technicians.";
+    cout<<"3 = Main Actors";
     cout<<"\n";
-    cout<<"4 = Introduce Actors";
+    cout<<"4 = Firm Statistics";
     cout<<"\n";
-    cout<<"5 = Firm Employees";
+    /*
+    cout<<"5 = Actors Specialization";
     cout<<"\n";
-    cout<<"6 = Firm Statistics";
-    cout<<"\n";
-    cout<<"0 = EXIT!";
+    */
+    cout<<"0 = EXIT!\n";
     cout<<"\n===========================================\n";
 }
 void menu()
@@ -766,7 +755,7 @@ void menu()
         cin>>option;
         if (option==1)
         {
-            cout<<"Give the number of employees to introduce: ";
+            cout<<"\nGive the number of employees to introduce: ";
             cin>>n;
             v=new personnel*[n];
             if (n>0)
@@ -777,25 +766,7 @@ void menu()
             else
                 cout<<"The given number has to be positive.\n";
         }
-        if (option==2)
-        {
-            DistributionFirm <director> x;
-            cin>>x;
-            cout<<x;
-        }
-        if (option==3)
-        {
-            DistributionFirm <technician> x;
-            cin>>x;
-            cout<<x;
-        }
-        if (option==4)
-        {
-            DistributionFirm <actor> x;
-            cin>>x;
-            cout<<x;
-        }
-        if (option == 5)
+        if (option == 2)
         {
             if (n == 0){
                 cout << "\n No employees have been added yet. \n";
@@ -809,7 +780,22 @@ void menu()
                     }
             }
         }
-        if (option == 6)
+        if (option == 3)
+        {   int actor_checker = 0;
+            if (n>0){
+                for(int i=0;i<n;i++)
+                {
+                    actor *p=dynamic_cast<actor*>(v[i]);
+                    if(p->getMainActor(i))
+                        actor_checker ++;
+                }
+                cout << "\n" << "Number of Main Actors: " << actor_checker;
+
+                }
+            else
+                cout << "\n No Main Actors.";
+        }
+        if (option == 4)
         {
             int NrDir,NrAct,NrTech;
             NrDir=NrAct=NrTech=0;
@@ -837,11 +823,18 @@ void menu()
                 cout<<"Nothing has been added yet, add something with action 1 \n";
             }
         }
+        /*if (option== 5){
+
+            DistributionFirm<actor> Z;
+            cin>>Z;
+            cout<<Z;
+
+        }*/
         if (option==0)
         {
             cout<<"\nEXIT\n\n";
         }
-        if (option<0||option>5)
+        if (option<0||option>3)
         {
             cout<<"\nInvalid Selection\n";
         }
